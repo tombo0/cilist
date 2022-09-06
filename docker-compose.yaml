@@ -25,4 +25,4 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - REACT_APP_BACKEND_URL=http://ec2-100-26-255-159.compute-1.amazonaws.com:5000
+      - REACT_APP_BACKEND_URL=http://ec2-100-26-255-159.compute-1.amazonaws.com:5000 
