@@ -12,7 +12,7 @@ pipeline {
                         .trim()
                 }
                 sh 'echo $GIT_COMMIT_SHORT'
-                sh 'echo ${GIT_COMMIT:0:7}'
+                echo '${GIT_COMMIT:0:7}'
                 sh 'echo ${GIT_COMMIT,length=7}'
             }
         }
