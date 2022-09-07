@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   database:
-    container_name: cilist-db
-    image: profesorgreen36/cilist-db:${GIT_COMMIT_SHORT}
+    container_name: cilist-pipeline-db
+    image: profesorgreen36/cilist-pipeline-db:${GIT_COMMIT_SHORT}
   
   backend:
-    image: profesorgreen36/cilist-be:${GIT_COMMIT_SHORT}
+    image: profesorgreen36/cilist-pipeline-be:${GIT_COMMIT_SHORT}
     ports:
       - "5000:5000"
     depends_on:
@@ -21,7 +21,7 @@ services:
       - DATABASE_PORT=3306
   
   frontend:
-    image: profesorgreen36/cilist-fe:${GIT_COMMIT_SHORT}
+    image: profesorgreen36/cilist-pipeline-fe:${GIT_COMMIT_SHORT}
     ports:
       - "3000:3000"
     environment:
