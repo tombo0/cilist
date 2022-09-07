@@ -40,20 +40,15 @@ pipeline {
 
     stage('Deploy to remote server') {
       steps {
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: ''
-            'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
 
             echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" > .env
 
-            docker compose up - d
+            docker compose up -d
 
             sleep 40
 
-            docker compose restart backend ''
-            ', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: ' [, ] + ', remoteDirectory: '
-            ', remoteDirectorySDF: false, removePrefix: '
-            ', sourceFiles: '
-            docker - compose.yaml ')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            docker compose restart backend''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
         }
       }
     }
