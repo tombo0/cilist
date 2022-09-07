@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_COMMIT_SHORT = '${GIT_COMMIT:0:7}'
+        GIT_COMMIT_SHORT = sh ('''echo ${GIT_COMMIT:0:7}''')
     }
 
 
