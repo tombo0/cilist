@@ -4,8 +4,10 @@ pipeline {
     stages {
         stage('Prepare env') {
             steps {
-                echo '$GIT_COMMIT'
-                sh 'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)'
+                sh 'echo $GIT_COMMIT'
+                script {
+                    sh 'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)'
+                }
                 sh 'echo $GIT_COMMIT_SHORT'
             }
         }
