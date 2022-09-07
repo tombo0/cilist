@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy to remote server') {
       steps {
         sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''
-            echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" > .env
+            echo "GIT_COMMIT_SHORT=$GIT_COMMIT_SHORT" > .env
 
             docker compose up -d
 
