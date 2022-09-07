@@ -17,7 +17,7 @@ pipeline {
                     script {
                         sh 'echo ${GIT_COMMIT_SHORT}'
                     }
-                    sh "echo ${GIT_COMMIT_SHORT}"
+                    sh 'echo "diluar script : ${GIT_COMMIT_SHORT}"'
                 }
             }
         }
