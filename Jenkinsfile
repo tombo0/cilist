@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        TOMBS = 'taufik maulana'
+    }
+
+
     stages {
         stage('Prepare env') {
             steps {
@@ -13,7 +18,8 @@ pipeline {
                 }
                 sh 'echo $GIT_COMMIT_SHORT'
                 // sh 'echo ${GIT_COMMIT:0:5}'
-                echo '''${GIT_COMMIT}'''
+                echo '''GIT_COMMIT'''
+                sh 'echo $TOMBS'
             }
         }
         stage('Build DB') {
