@@ -49,39 +49,18 @@ pipeline {
     }
 
     sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: ''
-                'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
+        'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
 
-                echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" > .env
+        echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" > .env
 
-                docker compose up - d
+        docker compose up - d
 
-                sleep 40
+        sleep 40
 
-                docker compose restart backend ''
-                ', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: ' [, ] + ', remoteDirectory: '
-                ', remoteDirectorySDF: false, removePrefix: '
-                ', sourceFiles: '
-                docker - compose.yaml ')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-
-                // stage('Install Dependencies') {
-                //     steps {
-                //         sh 'npm install'
-                //     }
-                // }
-                // stage('Copy .env') {
-                //     steps {
-                //         sh 'cp .env.example .env'
-                //     }
-                // }
-                // stage('Test') {
-                //     steps {
-                //         sh 'npm test'
-                //     }
-                // }
-                // stage('Build') {
-                //     steps {
-                //         sh 'npm build'
-                //     }
-                // }
-              }
-            }
+        docker compose restart backend ''
+        ', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: ' [, ] + ', remoteDirectory: '
+        ', remoteDirectorySDF: false, removePrefix: '
+        ', sourceFiles: '
+        docker - compose.yaml ')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+    }
+}
