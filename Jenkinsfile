@@ -3,11 +3,6 @@ pipeline {
         docker { image 'node:16.13.1-alpine' }
     }
     stages {
-        stage('Test') {
-            steps {
-                sh 'npm test'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
@@ -16,6 +11,11 @@ pipeline {
         stage('Copy .env') {
             steps {
                 sh 'cp .env.example .env'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
             }
         }
         stage('Build') {
