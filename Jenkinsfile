@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Prepare env') {
             steps {
-                echo ${GIT_COMMIT}
+                echo '${GIT_COMMIT}'
                 sh 'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)'
             }
         }
         stage('Build DB') {
             steps {
                 dir('database') {
-                    echo ${GIT_COMMIT_SHORT}
+                    echo '${GIT_COMMIT_SHORT}'
                 }
             }
         }
