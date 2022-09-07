@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_COMMIT_SHORT = sh ('''echo $GIT_COMMIT | head -c 7''')
+        GIT_COMMIT_SHORT = sh (returnStdout: true, script: '''echo $GIT_COMMIT | head -c 7''')
     }
 
 
@@ -10,15 +10,14 @@ pipeline {
         stage('Prepare env') {
             steps {
                 sh 'echo $GIT_COMMIT'
-                script {
-                    GIT_COMMIT_SHORT = sh(
-                        returnStdout: true, 
-                        script: '''echo $GIT_COMMIT | head -c 7''')
-                        .trim()
-                }
+                // script {
+                //     GIT_COMMIT_SHORT = sh(
+                //         returnStdout: true, 
+                //         script: '''echo $GIT_COMMIT | head -c 7''')
+                //         .trim()
+                // }
                 sh 'echo $GIT_COMMIT_SHORT'
                 // sh 'echo ${GIT_COMMIT:0:5}'
-                echo '''GIT_COMMIT'''
             }
         }
         stage('Build DB') {
