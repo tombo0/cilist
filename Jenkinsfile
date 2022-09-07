@@ -13,7 +13,7 @@ pipeline {
                 }
                 sh 'echo $GIT_COMMIT_SHORT'
                 sh 'echo ${GIT_COMMIT:0:5}'
-                echo '${GIT_COMMIT:0:5}'
+                echo '${GIT_COMMIT}'
                 sh 'echo """${GIT_COMMIT,length=7}"""'
             }
         }
