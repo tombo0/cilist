@@ -40,7 +40,7 @@ pipeline {
 
     stage('Deploy to remote server') {
       steps {
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''export GIT_COMMIT_SHORT=$GIT_COMMIT_SHORT
 
             echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" > .env
 
