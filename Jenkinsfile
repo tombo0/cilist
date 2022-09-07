@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        TOMBS = 'taufik maulana'
+        GIT_COMMIT_SHORT = '${GIT_COMMIT:0:7}'
     }
 
 
@@ -19,7 +19,6 @@ pipeline {
                 sh 'echo $GIT_COMMIT_SHORT'
                 // sh 'echo ${GIT_COMMIT:0:5}'
                 echo '''GIT_COMMIT'''
-                sh 'echo $TOMBS'
             }
         }
         stage('Build DB') {
