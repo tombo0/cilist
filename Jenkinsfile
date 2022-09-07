@@ -8,9 +8,11 @@ pipeline {
 
     stages {
         stage('Build DB') {
-            dir('database') {
-                steps {
-                    sh 'hai'
+            steps {
+                dir('database') {
+                    sh 'docker build . -t cilist-pipeline-db:$GIT_COMMIT_SHORT'
+                    sh 'docker tag cilist-pipeline-db:$GIT_COMMIT_SHORT profesorgreen36/cilist-pipeline-db:$GIT_COMMIT_SHORT'
+                    sh 'docker push'
                 }
             }
         }
