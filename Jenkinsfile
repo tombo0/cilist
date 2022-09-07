@@ -6,6 +6,12 @@ pipeline {
   }
 
   stages {
+    stage('Prepare .env') {
+      steps {
+        sh 'echo GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT) > .env'
+      }
+    }
+
     stage('Build database') {
       steps {
         dir('database') {
@@ -38,15 +44,8 @@ pipeline {
 
     stage('Deploy to remote server') {
       steps {
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''export GIT_COMMIT_SHORT_BARU=$GIT_COMMIT_SHORT
-
-            echo "short lama : $GIT_COMMIT_SHORT"
-            
-            echo "short baru : $GIT_COMMIT_SHORT_BARU"
-            
-            echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT_BARU)" > .env
-
-            docker compose up -d''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''
+            docker compose up -d''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
         }
       }
     }
