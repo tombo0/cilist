@@ -2,9 +2,7 @@ pipeline {
   agent any
 
   environment {
-    GIT_COMMIT_SHORT = sh(returnStdout: true, script: ''
-      'echo $GIT_COMMIT | head -c 7'
-      '')
+    GIT_COMMIT_SHORT = sh(returnStdout: true, script: '''echo $GIT_COMMIT | head -c 7''')
   }
 
   stages {
