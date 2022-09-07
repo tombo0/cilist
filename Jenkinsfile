@@ -6,7 +6,10 @@ pipeline {
             steps {
                 sh 'echo $GIT_COMMIT'
                 script {
-                    sh 'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)'
+                    GIT_COMMIT_SHORT = sh(
+                        returnStdout: true, 
+                        script: '''echo $GIT_COMMIT | head -c 7''')
+                        .trim()
                 }
                 sh 'echo $GIT_COMMIT_SHORT'
             }
