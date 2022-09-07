@@ -5,7 +5,22 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'npm test'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Copy .env') {
+            steps {
+                sh 'cp .env.example .env'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'npm build'
             }
         }
     }
