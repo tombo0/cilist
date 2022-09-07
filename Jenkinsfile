@@ -12,6 +12,7 @@ pipeline {
             steps {
                 dir('database') {
                     echo '${GIT_COMMIT_SHORT}'
+                    echo '${GIT_COMMIT}'
                 }
             }
         }
